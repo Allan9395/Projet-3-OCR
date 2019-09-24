@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="shortcut icon" href="assets/logofavicon.ico">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+    <link rel="stylesheet" href="style.css">
+    <title>Vélib Paris</title>
+</head>
+
+<body>
+    <!--                                               HEADER                                                                            -->
+    <header>
+        <div class="logo">
+            <img src="assets/ParisVéloLoc.png" alt="ParisVéloLoc" id="logo">
+            <a href="index.html"></a>
+        </div>
+        <nav id="menu">
+            <ul>
+                <li><a href="#infos">INFOS</a></li>
+                <li><a href="#ancreMapAndData">CARTE</a></li>
+                <li><a href="#textFooter">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!--                                               HEADER                                                                            -->
+    <!--                                               SECTION 1 SLIDER                                                                  -->
+    <section class="section1-slider">
+        <img id="presentationParis" src="assets/presentationparis.jpg" alt="Paris">
+        <div id="text-slider">
+            <h1><strong id="nom-application">BIENVENUE À ParisVéloLoc : Votre service de location de vélo</strong></h1>
+            <a href="#ancreMapAndData" id="louerVelo">Louer un vélo</a>
+        </div>
+    </section>
+    <!--                                                SECTION 1 SLIDER                                                                 -->
+    <!--                                                SECTION 2 Infos                                                                  -->
+    <section class="section2-Infos">
+        <h2 id="infos">INFOS</h2>
+        <div id="diaporama">
+            <div id="imgSlider">
+                <figure class="imageInfos">
+                    <img src="assets/01.jpeg" alt="une image" class="imgSlider">
+                    <div class="bouton bouton-gauche">
+                        <a id="prev"><i class="fas fa-angle-left"></i></a>
+                    </div>
+                    <div class="bouton bouton-droit">
+                        <a id="next"><i class="fas fa-angle-right"></i></a>
+                    </div>
+                </figure>
+            </div>
+            <div class="playStopButton">
+                <button class="play btnPlayStop">Play</button>
+                <button class="stop btnPlayStop">Stop</button>
+            </div>
+        </div>
+    </section>
+    <!--                                          SECTION 2 Map et Formulaires                                                           -->
+    <!-- informations de la station et formulaire -->
+    <div id="ancreMapAndData"></div>
+    <div id="mapAndData">
+        <!-- carte -->
+
+        <div id="map">
+            <div id="mapid"></div>
+        </div>
+        <div id="Data">
+            <div id="dataStations">
+                <h3>Détails de la station</h3>
+                <h4></h4>
+                <p id="nameStation"></p>
+                <p>Address :</p>
+                <p id="address"></p>
+                <p>Nombre de places : <span id="nbVeloStation"></span></p>
+                <p>Vélo disponible : <span id="nbVeloDisponible"></span> </p>
+                <p>Station : <span id="statutStation"></span> </p>
+                <button class="btnVelo btnReserver" id="btn-Reserver">Réserver</button>
+                <div id="identity"></div>
+            </div>
+
+            <!-- formulaire -->
+            <form class="form formReservation" action="" method="GET" name="formulaire" onsubmit="return valider ()">
+                <h3>Veuillez vous identifier pour reserver votre vélo</h3>
+                <div id="input">
+                    <p><label for="lastName">Nom : </label><input type="text" name="lastName" id="lastName" required>
+                    </p>
+                    <p><label for="firstName">Prénom : </label><input type="text" name="firstName" id="firstName"
+                            required></p>
+                </div>
+                <input type="submit" value="Réservation" class="btnVelo btnReservation">
+            </form>
+
+            <form class="form formCanvas">
+                <h3>Veuillez signer pour valider votre réservation</h3>
+                <canvas id="my-canvas" width="300" height="150">
+                    Votre navigateur ne supporte pas cet élément
+                </canvas>
+                <div id="divbutton">
+                    <button class="btnVelo btnReset">Reset</button>
+                    <input type="submit" value="Valider" class="btnVelo btnValider">
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--                                      SECTION 2 Map et Formulaires                                                           -->
+    <!--                                      SECTION 3 Bon Reservation                                                           -->
+
+    <!-- informations de la réservations -->
+
+    <div id="bookingData">
+        <h2>Votre bon de reservation</h2>
+        <div id="recapReservation">
+            <div id="dataClient">
+                <h3>Client :</h3>
+                <p>Madame, Monsieur,</p>
+                <p><span id="dataClientLastName"></span> <span id="dataClientFirstName"></span></p>
+            </div>
+            <div id="dataReservation">
+                <h3>La station :</h3>
+                <p><span id="nameStationDataReservation"></span></p>
+                <p><span id="addressSattionDataReservation"></span></p>
+                <p>Nombre de vélo loué : <span>1</span> Vélo</p>
+            </div>
+            <div id="signature">
+                <img src="" alt="dataCanvas" id="dataCanvasDom">
+            </div>
+        </div>
+        <div id="infosDecompte">
+            <p> 
+                <span id="textElt">Temps restant avant expiration de la réservation</span>
+                <span id="stopReservation">Votre reservation est annulée</span>
+                <span id="timeElt">Votre réservation est terminé merci à bientôt</span>
+                <span id="time"></span>
+            </p>
+        </div>
+        <button id="btnAnnuler" class="btnVelo">Annuler</button>
+
+    </div>
+    <!--                                             SECTION 3 Bon Reservation                                                           -->
+    <!--                                             SECTION 4 Footer                                                                    -->
+    <footer>
+        <img src="assets/ParisVéloLoc.png" alt="logoParisVeloLoc" class="logoParisVeloLoc">
+        <div id="textFooter">
+            <p>Ceci est un site étudiant, développé dans le cadre d'un projet.</p>
+        </div>
+        <div id="textEntrepriseFooter">
+            <p>Nous contacter</p>
+            <p>Du lundi au samedi de 8h à 20h</p>
+            <p>Le dimanche et les jours fériés de 10h à 19h</p>
+            <p>01 30 79 33 44</p>
+            <p>contact.parisveloloc@jcdecaux.com</p>
+            <p>ParisVéloLoc TSA 90003 78378 Paris Cedex</p>
+        </div>
+
+    </footer>
+    <!--                                             SECTION 4 Footer                                                                    -->
+    <!--                                             SECTION 5 Les Scripts                                                               -->
+
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+        crossorigin=""></script>
+    <script src="js/Diaporama.js"></script>
+    <script src="js/Map.js"></script>
+    <script src="js/Canvas.js"></script>
+    <script src="js/Timer.js"></script>
+    <script src="js/Index.js"></script>
+    <!--                                             SECTION 5 Les Scripts                                                               -->
+</body>
+</html>
